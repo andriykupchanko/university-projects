@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import pool from './config/db'; // Import your database pool
 
 dotenv.config();
 const app = express();
@@ -19,6 +20,14 @@ app.get('/api/sensors', (req, res) => {
   res.status(200).json(sensorData);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Check PostgreSQL connection
+pool.connect()
+  .then(() => {
+    console.log('Connected to PostgreSQL database successfully!');
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Could not connect to PostgreSQL database:', err);
+  });
