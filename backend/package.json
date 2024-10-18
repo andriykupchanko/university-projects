@@ -17,6 +17,7 @@
     "express": "^4.21.0",
     "pg": "^8.13.0",
     "pg-hstore": "^2.3.4",
+    "recharts": "^2.13.0",
     "sequelize": "^6.37.4",
     "sequelize-typescript": "^2.1.6"
   },

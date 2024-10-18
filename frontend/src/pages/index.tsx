@@ -1,6 +1,5 @@
 // frontend/src/pages/index.tsx
 import SensorData from '../components/common/SensorData';
-
 const Home = () => {
   return (
     <div className="p-4">
