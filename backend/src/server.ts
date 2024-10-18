@@ -6,8 +6,8 @@ import sequelize from './config/sequelize';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5001;
-const url = process.env.ARDUINO_URL || '';
+const PORT = process.env.PORT ;
+const url = process.env.ARDUINO_URL ;
 
 
 app.use(cors());
