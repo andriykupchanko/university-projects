@@ -29,7 +29,6 @@ void loop()
         Serial.println("Client connected");
         String request = "";
 
-        // Зчитуємо дані від клієнта
         while (client.connected())
         {
             if (client.available())
