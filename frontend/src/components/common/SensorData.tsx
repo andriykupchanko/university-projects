@@ -10,28 +10,32 @@ const SensorData = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:5001/api/sensors');
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Network response was not ok: ${response.status} ${errorText}`);
-        }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message); 
-        } else {
-          setError('Unknown error occurred');
-        }
-      } finally {
-        setLoading(false);
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:5001/api/sensors');
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok: ${response.status} ${errorText}`);
       }
-    };
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message); 
+      } else {
+        setError('Unknown error occurred');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchData();
+  useEffect(() => {
+    fetchData(); // Запит даних одразу при завантаженні компонента
+
+    const intervalId = setInterval(fetchData, 1000); // Запитуємо дані кожну секунду
+
+    return () => clearInterval(intervalId); // Очищуємо інтервал при розмонтуванні компонента
   }, []);
 
   if (loading) {

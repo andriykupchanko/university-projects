@@ -1,5 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
+import Role from '../models/Role';
+import Sensor from '../models/Sensor';
+import Measurement from '../models/Measurement';
+import User from '../models/User';
 
 dotenv.config();
 
@@ -10,7 +14,7 @@ const sequelize = new Sequelize({
   password: process.env.PG_PASSWORD,
   port: Number(process.env.PG_PORT),
   username: process.env.PG_USER,
-  models: [__dirname + '/models'], // Path to your model files
+  models: [Role,Sensor,Measurement,User] 
 });
 
 export default sequelize;

@@ -1,10 +1,12 @@
-// frontend/src/pages/index.tsx
-import SensorData from '../components/common/SensorData';
-const Home = () => {
+// pages/index.tsx
+import React from 'react';
+import SensorDataChart from '../components/specific/SensorDataChart';
+
+const Home: React.FC = () => {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Welcome to the Sensor Dashboard</h1>
-      <SensorData />
+    <div>
+      <h1>Welcome to My Sensor Data Dashboard</h1>
+      <SensorDataChart />
     </div>
   );
 };
