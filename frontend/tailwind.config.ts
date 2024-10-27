@@ -6,7 +6,12 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx}', // If using Next.js app directory
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-gray': 'rgb(30, 30, 30)',
+      },
+    },
   },
+  variants: {},
   plugins: [],
 };
