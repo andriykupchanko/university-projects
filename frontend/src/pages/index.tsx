@@ -5,7 +5,11 @@ import AuthButton from "@/components/common/AuthButton";
 
 const Home: React.FC = () => {
   return (
+<<<<<<< HEAD
     <div className="bg-custom-gray text-white p-4">
+=======
+    <div className="">
+>>>>>>> f47915bc19179275be355bf77961612697d0edf3
       <h1 className="text-3xl font-extrabold text-center p-7">
         Welcome to My Sensor Data Dashboard
       </h1>
