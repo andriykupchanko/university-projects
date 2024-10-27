@@ -1,33 +1,27 @@
 import React, { useState } from "react";
-import RegistrationForm from "./RegistrationForm";
+import  RegistrationLink from "./RegistrationLink";
 
 interface LoginFormProps {
   onClose: () => void;
+  onLogin: () => void; // Додайте пропс для обробки успішного логіну
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onClose, onLogin }) => {
   const [showRegistration, setShowRegistration] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://your-backend-url/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ login, password })
-      });
 
-      if (!response.ok) throw new Error("Login failed");
-
-      const data = await response.json();
-      console.log("Login successful", data);
+    // Локальна перевірка логіна та пароля
+    if (login === "admin" && password === "admin") {
+      console.log("Login successful");
+      onLogin(); // Виклик функції для оновлення стану аутентифікації
       onClose(); // Закриваємо форму після успішного логіну
-    } catch (error) {
-      console.error(error);
+    } else {
+      console.error("Invalid login or password");
+      // Тут можна додати відображення повідомлення про помилку
     }
   };
 
@@ -76,13 +70,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
               </div>
               <button
                 type="submit"
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition w-[100%]"
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 transition w-full"
               >
                 Login
               </button>
             </form>
             <p className="mt-4">
-              Don`t have an account?
+              Don’t have an account?
               <button
                 onClick={() => setShowRegistration(true)}
                 className="text-blue-500 hover:underline ml-1"

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import LoginForm from './LoginForm';
+import React, { useState } from "react";
+import LoginForm from "./LoginForm";
 
-const AuthButton: React.FC = () => {
+interface AuthButtonProps {
+  onLogin: () => void; // Додайте проп для функції автентифікації
+}
+
+const AuthButton: React.FC<AuthButtonProps> = ({ onLogin }) => {
   const [showLogin, setShowLogin] = useState(false);
 
   const handleButtonClick = () => {
@@ -16,7 +20,15 @@ const AuthButton: React.FC = () => {
       >
         Auth
       </button>
-      {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
+      {showLogin && (
+        <LoginForm
+          onClose={() => setShowLogin(false)}
+          onLogin={() => {
+            onLogin(); // Виклик функції автентифікації
+            setShowLogin(false); // Закриваємо форму після успішного логіну
+          }}
+        />
+      )}
     </div>
   );
 };
